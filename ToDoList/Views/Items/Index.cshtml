@@ -12,10 +12,22 @@
 } 
 else
 {
+  <h5>Not yet completed:</h5>
   <ul>
     @foreach (Item item in Model)
     {
-      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name</li>
+      if (item.Completed == false) {
+        <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name</li>
+      }
+    }
+  </ul>
+  <h5>Completed tasks:</h5>
+  <ul>
+    @foreach (Item item in Model)
+    {
+      if (item.Completed == true) {
+        <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name</li>
+      }
     }
   </ul>
 }

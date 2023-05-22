@@ -18,6 +18,9 @@
   @Html.LabelFor(model => model.Category)
   @Html.DropDownList("CategoryId")
 
+  @Html.LabelFor(model => model.Completed, "Mark as complete")
+  @Html.CheckBoxFor(model => model.Completed)
+
   <input type="submit" value="Save" />
 }
 
