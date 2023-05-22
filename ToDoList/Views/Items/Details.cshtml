@@ -9,6 +9,14 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>  
 <h3>@Html.DisplayNameFor(model => model.Category): @Html.DisplayFor(model => model.Category.Name)</h3>
+@if(@Model.Completed == false)
+{
+    <p>This item has not been completed!</p>
+}
+else
+{
+    <p>Completed!</p>
+}
 
 @if(@Model.JoinEntities.Count == 0)
 {
@@ -21,6 +29,11 @@ else
     @foreach(ItemTag join in Model.JoinEntities)
     {
       <li>Tag: @join.Tag.Title</li>
+      @using (Html.BeginForm("DeleteJoin", "Items"))
+      {
+        @Html.Hidden("joinId", @join.ItemTagId)
+        <input type="submit" value="Delete"/>
+      }
     }
   </ul>
 }
@@ -28,3 +41,4 @@ else
 <p>@Html.ActionLink("Back to list", "Index")</p>
 <p>@Html.ActionLink("Edit Item or Category", "Edit", new { id = Model.ItemId })</p>
 <p>@Html.ActionLink("Delete Item", "Delete", new { id = Model.ItemId })</p>
+<p>@Html.ActionLink("Add a Tag", "AddTag", new { id = Model.ItemId })</p>
